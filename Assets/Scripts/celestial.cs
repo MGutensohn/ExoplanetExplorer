@@ -28,19 +28,19 @@ namespace Celestial
     }
     public class Star
     {
-        public string name;
-        public float distance;
-        public Vector3 startingPosition;
-        public Vector3 location;
-        public List<Exoplanet> planets;
+        public string name; // Name of star
+        public float distance; // Distance from the Earth
+        public Vector3 startingPosition; // Globe position
+        public Vector3 location; // Location in field-mode
+        public List<Exoplanet> planets; // planets in orbit of this star.
     }
     public class Exoplanet
     {
-        public string name;
-        public float smAxis;
-        public float eccentricity;
-        public float inclination;
-        public float period;
+        public string name;  // Planet Name
+        public float smAxis;  // Semi-Major Axis in AU
+        public float eccentricity;  // Orbit Eccentricity
+        public float inclination; // Orbit inclination in degrees
+        public float period; // Orbital period in days
     }
 }
   

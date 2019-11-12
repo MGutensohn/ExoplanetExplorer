@@ -14,7 +14,7 @@ public class StarController : MonoBehaviour
     {
         this.scale = scale;
         info = s;
-        gameObject.name = info.pl_hostname;
+        gameObject.name = info.name;
         transform.position = info.startingPosition * scale;
     }
     void Start()

@@ -9,27 +9,38 @@ using UnityEngine;
 namespace Celestial
 {
     [Serializable]
-    public class Star
+    public class RawData
     {
         public string pl_hostname;
         public float ra;
         public float dec;
         public float st_dist;
+        public string pl_name;
+        public float pl_orbsmax;
+        public float pl_orbseccen;
+        public float pl_orbincl;
+        public float pl_orbper;
+    }
+    [Serializable]
+    public class Observed
+    {
+        public RawData[] rawData;
+    }
+    public class Star
+    {
+        public string name;
+        public float distance;
         public Vector3 startingPosition;
         public Vector3 location;
-        //public Exoplanet [] planets;
+        public List<Exoplanet> planets;
     }
-     [Serializable]
-     public class Observed
-     {
-         public Star[] stars;
-     }
-
-
-
-//   public class Exoplanet
-//   {
-//       public string name;
-//   }
+    public class Exoplanet
+    {
+        public string name;
+        public float smAxis;
+        public float eccentricity;
+        public float inclination;
+        public float period;
+    }
 }
   

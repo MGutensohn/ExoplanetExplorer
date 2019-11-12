@@ -19,6 +19,7 @@ public class StarGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stars = new List<Star>();
         StartCoroutine(GetStars());
     }
 
@@ -31,16 +32,11 @@ public class StarGenerator : MonoBehaviour
             {
                 Star s = stars[stars.Count - 1];
                 stars.RemoveAt(stars.Count - 1);
-                if (!GameObject.Find(s.pl_hostname))
-                {
-                    var newStar = Instantiate(star_prefab);
-                    newStar.GetComponent<StarController>().setStarData(s, scale);
-                    newStar.transform.parent = gameObject.transform;
-                }
-                else
-                {
-                    Debug.Log(s.pl_hostname + " Exists.");
-                }
+
+                var newStar = Instantiate(star_prefab);
+                newStar.GetComponent<StarController>().setStarData(s, scale);
+                newStar.transform.parent = gameObject.transform;
+                Debug.Log(newStar.name + " has " + s.planets.Count + " Planets.");
             }
             else{
                 break;
@@ -69,26 +65,47 @@ public class StarGenerator : MonoBehaviour
             else {
                 // Show results as text
                 Debug.Log("Success: " + www.downloadHandler.text);
-                celestialData = JsonUtility.FromJson<Observed>("{\"stars\":" + www.downloadHandler.text + "}");
-                stars = new List<Star>(celestialData.stars);
-                Debug.Log("Total number of stars: " + stars.Count);
-                
-                foreach (Star s in stars)
-                {
-                    float x = Mathf.Cos(s.ra) * Mathf.Cos(s.dec);
-                    float y = Mathf.Sin(s.ra) * Mathf.Cos(s.dec);
-                    float z = Mathf.Sin(s.dec);
-                    s.startingPosition = new Vector3(x,y,z);
-                    if(s.st_dist > 0)
-                    {
-                        s.location = Mathf.Log(s.st_dist) * s.startingPosition;
-                    }
-                    else
-                    {
-                        s.location = Mathf.Log(Mathf.Epsilon) * s.startingPosition;
-                    }
-                }
+                Debug.Log("download size: " + www.downloadHandler.data.Length);
 
+                celestialData = JsonUtility.FromJson<Observed>("{\"rawData\":" + www.downloadHandler.text + "}");
+                var rawData = new List<RawData>(celestialData.rawData);
+                Debug.Log("Total number of planets: " + rawData.Count);
+                
+                foreach (RawData r in rawData)
+                {
+                    
+                    Exoplanet ep = new Exoplanet();
+                    ep.name = r.pl_name;
+                    ep.inclination = r.pl_orbincl;
+                    ep.period = r.pl_orbper;
+                    ep.eccentricity = r.pl_orbseccen;
+                    ep.smAxis = r.pl_orbsmax;
+
+                    if(stars.FindIndex(star => star.name == r.pl_hostname) < 0)
+                    {
+                        Star s = new Star();
+                        s.name = r.pl_hostname;
+                        s.distance = r.st_dist;
+
+                        float x = Mathf.Cos(r.ra) * Mathf.Cos(r.dec);
+                        float y = Mathf.Sin(r.ra) * Mathf.Cos(r.dec);
+                        float z = Mathf.Sin(r.dec);
+
+                        s.startingPosition = new Vector3(x,y,z);
+                        if(s.distance > 0)
+                        {
+                            s.location = Mathf.Log(s.distance) * s.startingPosition;
+                        }
+                        else
+                        {
+                            s.location = Mathf.Log(Mathf.Epsilon) * s.startingPosition;
+                        }
+                        s.planets = new List<Exoplanet>();
+                        stars.Add(s);
+                    }
+                    stars.Find(star => star.name == r.pl_hostname).planets.Add(ep);
+                }
+                Debug.Log("Total number of stars: " + stars.Count);
             }
         }
     }

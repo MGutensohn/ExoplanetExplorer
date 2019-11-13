@@ -12,9 +12,11 @@ namespace Celestial
     public class RawData
     {
         public string pl_hostname;
+        public float st_teff;
         public float ra;
         public float dec;
         public float st_dist;
+        public float st_rad;
         public string pl_name;
         public float pl_orbsmax;
         public float pl_orbseccen;
@@ -29,6 +31,8 @@ namespace Celestial
     public class Star
     {
         public string name; // Name of star
+        public float size;
+        public float temperature;
         public float distance; // Distance from the Earth
         public Vector3 startingPosition; // Globe position
         public Vector3 location; // Location in field-mode

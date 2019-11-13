@@ -16,6 +16,10 @@ public class StarController : MonoBehaviour
         info = s;
         gameObject.name = info.name;
         transform.position = info.startingPosition * scale;
+        transform.localScale *= info.size;
+
+        Color starCol = Mathf.CorrelatedColorTemperatureToRGB(s.temperature);
+        gameObject.GetComponent<SpriteRenderer>().color = starCol;
     }
     void Start()
     {

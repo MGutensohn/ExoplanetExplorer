@@ -32,11 +32,9 @@ public class StarGenerator : MonoBehaviour
             {
                 Star s = stars[stars.Count - 1];
                 stars.RemoveAt(stars.Count - 1);
-
                 var newStar = Instantiate(star_prefab);
                 newStar.GetComponent<StarController>().setStarData(s, scale);
                 newStar.transform.parent = gameObject.transform;
-                Debug.Log(newStar.name + " has " + s.planets.Count + " Planets.");
             }
             else{
                 break;
@@ -49,7 +47,7 @@ public class StarGenerator : MonoBehaviour
     }
 
     IEnumerator GetStars() {
-        UnityWebRequest www = UnityWebRequest.Get("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,ra,dec,st_dist&order=pl_disc&format=json");
+        UnityWebRequest www = UnityWebRequest.Get("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_rad,st_teff,ra,dec,st_dist&order=pl_disc&format=json");
         yield return www.SendWebRequest();
         if(www.isDone)
         {
@@ -86,6 +84,16 @@ public class StarGenerator : MonoBehaviour
                         Star s = new Star();
                         s.name = r.pl_hostname;
                         s.distance = r.st_dist;
+                        s.temperature = r.st_teff;
+
+                        if(r.st_rad > 0)
+                        {
+                            s.size = Mathf.Log(r.st_rad);
+                        }
+                        else
+                        {
+                            s.size = 1;
+                        }
 
                         float x = Mathf.Cos(r.ra) * Mathf.Cos(r.dec);
                         float y = Mathf.Sin(r.ra) * Mathf.Cos(r.dec);

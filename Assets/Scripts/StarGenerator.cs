@@ -88,7 +88,8 @@ public class StarGenerator : MonoBehaviour
 
                         if(r.st_rad > 0)
                         {
-                            s.size = Mathf.Log(r.st_rad);
+                            var log = Mathf.Log(r.st_rad, 10);
+                            s.size =  log >= 0.5f ? log : 0.5f;
                         }
                         else
                         {
@@ -102,11 +103,11 @@ public class StarGenerator : MonoBehaviour
                         s.startingPosition = new Vector3(x,y,z);
                         if(s.distance > 0)
                         {
-                            s.location = Mathf.Log(s.distance) * s.startingPosition;
+                            s.location = Mathf.Log(s.distance, 10) * s.startingPosition;
                         }
                         else
                         {
-                            s.location = Mathf.Log(Mathf.Epsilon) * s.startingPosition;
+                            s.location = s.startingPosition;
                         }
                         s.planets = new List<Exoplanet>();
                         stars.Add(s);

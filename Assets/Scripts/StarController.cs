@@ -9,7 +9,7 @@ public class StarController : MonoBehaviour
     private Star info;
     private bool move = false;
     private float scale = 1f;
-
+    private int frames = 0;
     public void setStarData(Star s, float scale)
     {
         this.scale = scale;
@@ -20,17 +20,12 @@ public class StarController : MonoBehaviour
 
         Color starCol = Mathf.CorrelatedColorTemperatureToRGB(s.temperature);
         gameObject.GetComponent<SpriteRenderer>().color = starCol;
-    }
-    void Start()
-    {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ModeChangeHandler(bool newMode)
     {
-        transform.LookAt(Camera.main.transform);
-        if(transform.parent.gameObject.GetComponent<StarGenerator>().distance)
+        if(newMode)
         {
             transform.position = info.location * scale;
         }
@@ -38,5 +33,20 @@ public class StarController : MonoBehaviour
         {
             transform.position = info.startingPosition * scale;
         }
+    }
+    void Start()
+    {
+        transform.parent.gameObject.GetComponent<StarGenerator>().OnModeChange += ModeChangeHandler;
+    }
+
+    void OnDisable()
+    {
+        transform.parent.gameObject.GetComponent<StarGenerator>().OnModeChange -= ModeChangeHandler;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.LookAt(Camera.main.transform);
     }
 }

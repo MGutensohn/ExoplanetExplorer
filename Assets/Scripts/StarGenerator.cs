@@ -1,28 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using Celestial;
 
 public class StarGenerator : MonoBehaviour
 {
-    public GameObject star_prefab;
+    public GameObject starPrefab;
     private Observed celestialData;
     private List<Star> stars;
-    public bool distance = false;
-    public float scale = 1f;
-
-    public void ToggleDistance()
+    private bool mode = false;
+    private bool ToggleMode
     {
-        distance = !distance;
+        get {return mode;}
+        set {
+            if (mode == value) return;
+            mode = value;
+            
+            OnModeChange(mode);
+        }
     }
+
+    public void ToggleModeOnClick()
+    {
+        ToggleMode = !ToggleMode;
+    }
+
+    public delegate void OnVariableChangeDelegate(bool newMode);
+    public event OnVariableChangeDelegate OnModeChange;
+
+
+    public bool colorSizeMode = false;
+    public float scale = 0.2f;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         stars = new List<Star>();
         StartCoroutine(GetStars());
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -32,7 +49,7 @@ public class StarGenerator : MonoBehaviour
             {
                 Star s = stars[stars.Count - 1];
                 stars.RemoveAt(stars.Count - 1);
-                var newStar = Instantiate(star_prefab);
+                var newStar = Instantiate(starPrefab);
                 newStar.GetComponent<StarController>().setStarData(s, scale);
                 newStar.transform.parent = gameObject.transform;
             }
@@ -42,7 +59,7 @@ public class StarGenerator : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.C))
         {
-            ToggleDistance();
+            ToggleMode = true;
         }
     }
 
@@ -86,7 +103,7 @@ public class StarGenerator : MonoBehaviour
                         s.distance = r.st_dist;
                         s.temperature = r.st_teff;
 
-                        if(r.st_rad > 0)
+                        if(r.st_rad > 0 && colorSizeMode)
                         {
                             var log = Mathf.Log(r.st_rad, 10);
                             s.size =  log >= 0.5f ? log : 0.5f;

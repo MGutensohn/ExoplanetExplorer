@@ -56,9 +56,24 @@ public class FindPlanet : MonoBehaviour
         lr.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         lr.startColor = Color.red;
         lr.endColor = Color.red;
-        lr.endWidth = 0.002f;
-        lr.startWidth = 0.002f;
-        lr.SetPosition(0, closest.transform.position);
-        lr.SetPosition(1, destination.transform.position);
+        lr.endWidth = 0.003f;
+        lr.startWidth = 0.003f;
+
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position, (destination.transform.position - closest.transform.position).normalized, Vector3.Distance(closest.transform.position, destination.transform.position));
+        
+        Vector3[] lrPos = new Vector3[hits.Length + 1];
+        lrPos[0] = closest.transform.position;
+        lr.positionCount = hits.Length + 1;
+        System.Array.Sort(hits, (x,y) => x.distance.CompareTo(y.distance));
+
+
+        for (int i = 1; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            lrPos[i] =  hit.transform.position;
+        }
+        lrPos[hits.Length] = destination.transform.position;
+        lr.SetPositions(lrPos);
     }
 }

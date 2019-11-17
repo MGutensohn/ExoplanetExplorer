@@ -9,7 +9,6 @@ public class StarController : MonoBehaviour
     private Star info;
     private bool move = false;
     private float scale = 1f;
-    private int frames = 0;
     public void setStarData(Star s, float scale)
     {
         this.scale = scale;
@@ -18,8 +17,8 @@ public class StarController : MonoBehaviour
         transform.position = info.startingPosition * scale;
         transform.localScale *= info.size;
 
-        Color starCol = Mathf.CorrelatedColorTemperatureToRGB(s.temperature);
-        gameObject.GetComponent<SpriteRenderer>().color = starCol;
+        // Color starCol = Mathf.CorrelatedColorTemperatureToRGB(s.temperature);
+        // gameObject.GetComponent<SpriteRenderer>().color = starCol;
         
     }
 

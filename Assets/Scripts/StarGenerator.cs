@@ -8,6 +8,7 @@ public class StarGenerator : MonoBehaviour
 {
     public GameObject starPrefab;
     public Button toggleModeButton;
+    private List<Star> stars;
     private bool mode = false;
     private bool ToggleMode
     {
@@ -39,23 +40,30 @@ public class StarGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < 10; i++)
+        if (stars != null)
         {
-            if(Systems.stars.Count > 0)
+            for(int i = 0; i < 10; i++)
             {
-                Star s = Systems.stars[Systems.stars.Count - 1];
-                Systems.stars.RemoveAt(Systems.stars.Count - 1);
-                var newStar = Instantiate(starPrefab);
-                newStar.GetComponent<StarController>().setStarData(s, scale);
-                newStar.transform.SetParent(gameObject.transform, false);
+                if(stars.Count > 0)
+                {
+                    Star s = stars[stars.Count - 1];
+                    stars.RemoveAt(stars.Count - 1);
+                    var newStar = Instantiate(starPrefab);
+                    newStar.GetComponent<StarController>().setStarData(s, scale);
+                    newStar.transform.SetParent(gameObject.transform, false);
+                }
+                else{
+                    break;
+                }
             }
-            else{
-                break;
+            if(Input.GetKeyDown(KeyCode.C))
+            {
+                ToggleMode = true;
             }
         }
-        if(Input.GetKeyDown(KeyCode.C))
+        else
         {
-            ToggleMode = true;
+            stars = Systems.stars;
         }
     }
 }

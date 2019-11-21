@@ -8,6 +8,7 @@ public class FindPlanet : MonoBehaviour
     public InputField searchBar;
     public Button searchButton;
     private GameObject closest = null;
+    private string destinationName = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,9 @@ public class FindPlanet : MonoBehaviour
     public void FindStarByName()
     {
         GameObject destination = GameObject.Find(searchBar.text);
-        if(destination != null)
+        if(destination != null && destination.name != destinationName)
         {
+            destinationName = destination.name;
             DrawPath(destination);
         }
     }
@@ -38,13 +40,14 @@ public class FindPlanet : MonoBehaviour
 
         float distance = Mathf.Infinity;
         Vector3 position = Camera.main.transform.position;
+        Vector3 forward = Camera.main.transform.forward;
 
         Transform stars = GameObject.Find("starGenerator").transform;
         foreach (Transform t in stars)
         {
             Vector3 diff = t.position - position;
             float curDistance = diff.sqrMagnitude;
-            if(Vector3.Dot(transform.forward, diff) < 0)
+            if(Vector3.Dot(forward, diff) < 0)
                 continue;
 
             if (curDistance < distance)
@@ -64,7 +67,7 @@ public class FindPlanet : MonoBehaviour
         lr.startWidth = 0.003f;
 
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, (destination.transform.position - closest.transform.position).normalized, Vector3.Distance(closest.transform.position, destination.transform.position));
+        hits = Physics.RaycastAll(closest.transform.position, (destination.transform.position - closest.transform.position).normalized, Vector3.Distance(closest.transform.position, destination.transform.position) * 0.9f);
         
         Vector3[] lrPos = new Vector3[hits.Length + 1];
         lrPos[0] = closest.transform.position;
@@ -75,6 +78,7 @@ public class FindPlanet : MonoBehaviour
         for (int i = 1; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
+            Debug.Log(hit.transform.gameObject.name);
             lrPos[i] =  hit.transform.position;
         }
         lrPos[hits.Length] = destination.transform.position;

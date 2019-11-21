@@ -72,7 +72,7 @@ public class ReferencePointCreator : MonoBehaviour
                 pointer.transform.position = hitPose.position;
             }
         }
-        else if (pointer.activeInHierarchy)
+        else if (pointer != null)
         {
             Destroy(pointer);
         }

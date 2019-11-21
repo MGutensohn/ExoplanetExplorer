@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class FindPlanet : MonoBehaviour
 {
     public InputField searchBar;
+    public Button searchButton;
     private GameObject closest = null;
     // Start is called before the first frame update
     void Start()
     {
+        searchBar = GameObject.Find("Search Bar").GetComponent<InputField>();
+        searchButton = GameObject.Find("Search Button").GetComponent<Button>();
+        searchButton.onClick.AddListener(delegate {FindStarByName();});
     }
     // Update is called once per frame
     void Update()

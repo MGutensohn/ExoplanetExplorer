@@ -8,6 +8,10 @@ using UnityEngine;
 
 namespace Celestial
 {
+    public static class Systems
+    {
+        public static List<Star> stars;
+    }
     [Serializable]
     public class RawData
     {

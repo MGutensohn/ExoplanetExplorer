@@ -7,7 +7,6 @@ public class StarController : MonoBehaviour
 {
     public float speed = 1.0f;
     private Star info;
-    private bool move = false;
     private float scale = 1f;
     public void setStarData(Star s, float scale)
     {
@@ -15,7 +14,8 @@ public class StarController : MonoBehaviour
         info = s;
         gameObject.name = info.name;
         transform.position = info.startingPosition * scale;
-        transform.localScale *= info.size;
+        
+        //transform.localScale *= info.size;
 
         // Color starCol = Mathf.CorrelatedColorTemperatureToRGB(s.temperature);
         // gameObject.GetComponent<SpriteRenderer>().color = starCol;
@@ -26,11 +26,11 @@ public class StarController : MonoBehaviour
     {
         if(newMode)
         {
-            transform.position = info.location * scale;
+            transform.localPosition = info.location * scale;
         }
         else
         {
-            transform.position = info.startingPosition * scale;
+            transform.localPosition = info.startingPosition * scale;
         }
     }
     void Start()

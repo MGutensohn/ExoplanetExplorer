@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8066863060829478627}
   - component: {fileID: 2299642292471284295}
   - component: {fileID: 6068685876944294084}
+  - component: {fileID: 1788377029519010209}
   m_Layer: 0
   m_Name: sprite_star
   m_TagString: Untagged
@@ -94,3 +95,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+--- !u!135 &1788377029519010209
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312431916957862152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -1412,7 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchBar: {fileID: 1333658776}
-  searchButton: {fileID: 0}
+  searchButton: {fileID: 232447003}
 --- !u!114 &1615628258
 MonoBehaviour:
   m_ObjectHideFlags: 0

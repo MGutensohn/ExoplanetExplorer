@@ -18,8 +18,11 @@ public class StarController : MonoBehaviour
         //transform.localScale *= info.size;
 
         // Color starCol = Mathf.CorrelatedColorTemperatureToRGB(s.temperature);
-        // gameObject.GetComponent<SpriteRenderer>().color = starCol;
-        
+        // gameObject.GetComponent<SpriteRenderer>().color = starCol; 
+    }
+
+    public Star getStarData(){
+        return info;
     }
 
     private void ModeChangeHandler(bool newMode)

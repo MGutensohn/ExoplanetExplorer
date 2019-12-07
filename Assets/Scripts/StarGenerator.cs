@@ -33,8 +33,11 @@ public class StarGenerator : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(transform.position.x, Camera.main.transform.position.y, transform.position.z);
-        toggleModeButton = GameObject.Find("Toggle Mode").GetComponent<Button>();
-        toggleModeButton.onClick.AddListener(delegate {ToggleModeOnClick();});
+        if(GameObject.Find("Toggle Mode") != null)
+        {
+            toggleModeButton = GameObject.Find("Toggle Mode").GetComponent<Button>();
+            toggleModeButton.onClick.AddListener(delegate {ToggleModeOnClick();});
+        }
     }
     
     // Update is called once per frame

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>close</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6,5.43933983 L1.28033009,0.719669914 C0.987436867,0.426776695 0.512563133,0.426776695 0.219669914,0.719669914 C-0.0732233047,1.01256313 -0.0732233047,1.48743687 0.219669914,1.78033009 L4.93933983,6.5 L0.219669914,11.2196699 C-0.0732233047,11.5125631 -0.0732233047,11.9874369 0.219669914,12.2803301 C0.512563133,12.5732233 0.987436867,12.5732233 1.28033009,12.2803301 L6,7.56066017 L10.7196699,12.2803301 C11.0125631,12.5732233 11.4874369,12.5732233 11.7803301,12.2803301 C12.0732233,11.9874369 12.0732233,11.5125631 11.7803301,11.2196699 L7.06066017,6.5 L11.7803301,1.78033009 C12.0732233,1.48743687 12.0732233,1.01256313 11.7803301,0.719669914 C11.4874369,0.426776695 11.0125631,0.426776695 10.7196699,0.719669914 L6,5.43933983 Z" id="path-1"></path>
+    </defs>
+    <g id="close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons-/-Cross" transform="translate(10.000000, 9.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Icon" fill="#979797" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="Colors-/-White" mask="url(#mask-2)" fill="#FFFFFF">
+                <g transform="translate(-2.000000, -8.000000)" id="Color">
+                    <rect x="0" y="0" width="15.5" height="28.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

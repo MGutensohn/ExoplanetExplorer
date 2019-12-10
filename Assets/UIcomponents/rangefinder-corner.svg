@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>rangefinder-corner</title>
+    <desc>Created with Sketch.</desc>
+    <g id="rangefinder-corner" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="corner" transform="translate(2.000000, 2.000000)" stroke="#F7C600" stroke-width="2">
+            <path d="M0.54,26.46 L0.54,0.54" id="Line-2"></path>
+            <path d="M0.54,0.54 L26.46,0.54" id="Line-2-Copy"></path>
+        </g>
+    </g>
+</svg>
